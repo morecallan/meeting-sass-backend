@@ -4,8 +4,14 @@
 const Twilio = require('twilio');
 const firebase = require('firebase');
 const express = require('express');
+var bodyParser = require('body-parser');
+var cors = require('cors')
 const port = 3000
-app = express(); 
+const app = express(); 
+
+app.use(cors())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 
 let images = [];
@@ -81,10 +87,13 @@ const sendNotifications = (formData) =>  {
     }
 }
 
-app.post('/messager', function (req, res) {
-    console.log(req)
-    res.send('POST request to homepage');
-});
-
 initializeFirebase();
 app.listen(port);
+
+app.post('/messager', function(request, response) {
+    console.log(request.body.meetingTime);
+    console.log(request.body.meetingLength);
+    console.log(request.body.phone);
+});
+
+
