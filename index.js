@@ -115,7 +115,7 @@ app.post('/messager', function(request, response) {
     const form = {phone, meetingTime, meetingLength};
 
     setUpTimeouts(form)
-    response.send();
+    response.status(200).send('Sending messages!');
 });
 
 
